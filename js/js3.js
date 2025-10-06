@@ -164,3 +164,5 @@ myArray.__proto__.myForEach = function (cb) {
 myArray.myForEach((value, index, array) => {
   console.log(value, index, array);
 });
+
+// array methods: forEach, map, filter, reduce, join, slice

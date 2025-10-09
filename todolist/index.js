@@ -1,10 +1,11 @@
 const APIs = () => {
+  const baseURL = "http://localhost:3000/todos";
   const getTodos = () => {
-    return fetch("http://localhost:3000/todos").then((res) => res.json());
+    return fetch(baseURL).then((res) => res.json());
   };
 
   const createTodo = (newTodo) => {
-    return fetch("http://localhost:3000/todos", {
+    return fetch(baseURL, {
       method: "POST",
       body: JSON.stringify(newTodo),
       headers: {
@@ -12,15 +13,27 @@ const APIs = () => {
       },
     }).then((res) => res.json());
   };
+
+  const deleteTodo = (id) => {
+    return fetch(`${baseURL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+  };
+
   return {
     getTodos,
     createTodo,
+    deleteTodo,
   };
 };
 
 // MVC, model, view, controller
 class Model {
   #todos = [];
+  #onChange = () => {};
   constructor() {}
 
   get todos() {
@@ -29,10 +42,30 @@ class Model {
 
   set todos(newTodos) {
     this.#todos = newTodos;
+    // update the ui
+    this.#onChange();
   }
 
   addTodo(newTodo) {
     this.todos = [...this.todos, newTodo]; // immutability
+  }
+
+  deleteTodo(id) {
+    const filteredTodos = this.#todos.filter(
+      (todo, index, array) => id !== todo.id
+      // id === todo.id ? false : true
+    );
+    // const filteredTodos = this.#todos.filter((todo, index, array) => {
+    //   if (id === todo.id) {
+    //     return false;
+    //   } else return true;
+    // });
+    console.log(filteredTodos);
+    this.todos = filteredTodos;
+  }
+
+  subscribe(callback) {
+    this.#onChange = callback;
   }
 }
 
@@ -48,7 +81,9 @@ class View {
     todos.forEach((todo) => {
       const todoItem = document.createElement("li");
       todoItem.id = todo.id;
-
+      // todoItem.addEventListener("click", () => {
+      //   console.log("event listener on list item");
+      // });
       const span = document.createElement("span");
       span.textContent = todo.title;
 
@@ -79,19 +114,21 @@ class Controller {
   }
 
   initialize() {
+    this.model.subscribe(() => {
+      this.view.render(this.model.todos);
+    });
+
     const bindedHandleAddTodo = this.handleAddTodo.bind(this);
     this.view.addBtn.addEventListener("click", bindedHandleAddTodo);
+
+    const bindedHandleDeleteTodo = this.handleDeleteTodo.bind(this);
+    this.view.todoList.addEventListener("click", bindedHandleDeleteTodo);
 
     this.apis.getTodos().then((todos) => {
       console.log(todos);
       this.model.todos = todos;
       console.log(this.model.todos);
-      this.render();
     });
-  }
-
-  render() {
-    this.view.render(this.model.todos);
   }
 
   handleAddTodo(event) {
@@ -105,6 +142,20 @@ class Controller {
       this.view.clearInput();
     });
   }
+
+  handleDeleteTodo(event) {
+    // console.log(event.target.parentElement.id);
+
+    // console.log(event.target.classList.contains("todo__btn--delete"));
+
+    if (event.target.classList.contains("todo__btn--delete")) {
+      const todoId = event.target.parentElement.id;
+
+      this.apis.deleteTodo(todoId).then((deletedTodo) => {
+        this.model.deleteTodo(deletedTodo.id);
+      });
+    }
+  }
 }
 
 const apis = APIs();
@@ -112,3 +163,7 @@ const model = new Model();
 const view = new View();
 const controller = new Controller(model, view, apis);
 controller.initialize();
+
+// event delegation
+// capturing
+// bubbling

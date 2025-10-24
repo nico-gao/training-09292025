@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Counter from "./components/Counter";
 
 const people = [
   "Creola Katherine Johnson: mathematician",
@@ -21,11 +22,14 @@ export default function App() {
   return (
     // jsx -> js, babel (complier)
     <>
-      <ul>
-        {/* {listItems} */}
-        {/* {people.map((person) => (
+      <Counter />
+      <Counter />
+
+      {/* <ul>
+        {listItems}
+        {people.map((person) => (
           <li>{person}</li>
-        ))} */}
+        ))}
         {people.map((person, index) => (
           <Profile name={person} id={index} key={index}></Profile>
         ))}
@@ -34,7 +38,7 @@ export default function App() {
         {people.map((person, index) => (
           <Profile name={person} id={index} key={index}></Profile>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 }
@@ -80,7 +84,17 @@ function Profile({ name, id, children }) {
  * </Layout>
  */
 
-// Virtual DOM
+/**
+ * Virtual DOM
+ * trigger update (state update)
+ *
+ * components return new jsx -> generate the virtual dom
+ *
+ * reconciliation:
+ * previous virtual dom, new virtual dom (diffing algorithm) to find the minimal changes
+ *
+ * react only updates real DOM the parts that changed
+ */
 export const a = 1;
 export const foo = () => {
   console.log("foo function");

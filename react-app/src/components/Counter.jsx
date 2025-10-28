@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 export default function Counter() {
-  let [counter, setCounter] = useState(0); // hook
+  const [counter, setCounter] = useState(0); // hook
 
   const handleAddToCounter = () => {
     setCounter(counter + 1);
+    console.log("counter value after clicking the button: ", counter);
     // counter = counter + 1; // never do this
   };
 

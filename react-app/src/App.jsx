@@ -3,6 +3,8 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Counter from "./components/Counter";
+import Input from "./components/Input";
+import TodoApp from "./components/Todolist/TodoApp";
 
 const people = [
   "Creola Katherine Johnson: mathematician",
@@ -22,8 +24,10 @@ export default function App() {
   return (
     // jsx -> js, babel (complier)
     <>
-      <Counter />
-      <Counter />
+      <TodoApp />
+      {/* <Input /> */}
+      {/* <Counter /> */}
+      {/* <Counter /> */}
 
       {/* <ul>
         {listItems}

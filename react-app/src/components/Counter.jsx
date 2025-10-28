@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function Counter() {
-  const [counter, setCounter] = useState(0); // hook
+export default function Counter({ counter, setCounter }) {
+  // const [counter, setCounter] = useState(0); // hook
 
   const handleAddToCounter = () => {
     setCounter(counter + 1);

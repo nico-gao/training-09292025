@@ -1,10 +1,30 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Counter from "./components/Counter";
 import Input from "./components/Input";
 import TodoApp from "./components/Todolist/TodoApp";
+import TodoCount from "./components/Todolist/TodoCount";
+import Timer from "./components/Timer";
+
+const mockTodoData = [
+  {
+    id: 1,
+    title: "my first todo",
+    completed: false,
+  },
+  {
+    id: 2,
+    title: "my second todo",
+    completed: true,
+  },
+  {
+    id: 3,
+    title: "my third todo",
+    completed: false,
+  },
+];
 
 const people = [
   "Creola Katherine Johnson: mathematician",
@@ -15,18 +35,53 @@ const people = [
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState(mockTodoData);
+  const [toggleTimer, setToggleTimer] = useState(true);
 
   // const listItems = people.map((person) => <li>{person}</li>);
 
   // console.log("listItems", listItems);
   // console.log(<Profile />);
   // console.log(Profile);
+
+  // no dependency array
+  // run the setup function during mounting/updating
+  useEffect(() => {
+    console.log("use effect with no [] in App");
+
+    return () => {
+      console.log("clean up in App");
+    };
+  });
+
+  // empty dependency array
+  // run the setup function during mounting
+  useEffect(() => {
+    console.log("use effect with [] in App");
+  }, []);
+
+  // non-empty dependency array
+  // run the setup function during mounting/updating, but during updating, it listens to changes to the variables in dep array
+  useEffect(() => {
+    console.log("use effect with [todos] in App");
+  }, [todos]);
+
+  /**
+   * mounting -> 1st setup function call
+   * updating -> cleanup function call (for 1st render) -> 2nd setup function call
+   * updating -> cleanup (for the 2nd render) -> 3rd setup fn
+   * unmounting -> cleanup (for the 3rd render)
+   */
+
   return (
     // jsx -> js, babel (complier)
     <>
-      <TodoApp />
+      {toggleTimer && <Timer />}
+      <button onClick={() => setToggleTimer(!toggleTimer)}>Toggle Timer</button>
+      <TodoCount todos={todos} />
+      <TodoApp todos={todos} setTodos={setTodos} />
       {/* <Input /> */}
-      {/* <Counter /> */}
+      <Counter counter={count} setCounter={setCount} />
       {/* <Counter /> */}
 
       {/* <ul>
@@ -66,39 +121,6 @@ function Profile({ name, id, children }) {
   );
 }
 
-// img src
-// App -> Profile -> Avatar
-// unidirection data flow, parent -> child
-
-// export default App;
-
-/**
- * Layout component
- *
- * <div classname="app">
- *  <nav></nav>
- *  {children}
- * </div>
- *
- *
- * App component
- *
- * <Layout>
- *  <main>
- * </Layout>
- */
-
-/**
- * Virtual DOM
- * trigger update (state update)
- *
- * components return new jsx -> generate the virtual dom
- *
- * reconciliation:
- * previous virtual dom, new virtual dom (diffing algorithm) to find the minimal changes
- *
- * react only updates real DOM the parts that changed
- */
 export const a = 1;
 export const foo = () => {
   console.log("foo function");

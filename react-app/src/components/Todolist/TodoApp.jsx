@@ -1,30 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./Todolist";
 import TodoForm from "./TodoForm";
 
-const mockTodoData = [
-  {
-    id: 1,
-    title: "my first todo",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "my second todo",
-    completed: true,
-  },
-  {
-    id: 3,
-    title: "my third todo",
-    completed: false,
-  },
-];
-
-export default function TodoApp() {
-  const [todos, setTodos] = useState(mockTodoData);
+export default function TodoApp({ todos, setTodos }) {
   const [input, setInput] = useState("");
   const [editId, setEditId] = useState(null);
   const [editInput, setEditInput] = useState("");
+
+  useEffect(() => {
+    console.log("use effect in TodoApp");
+  });
 
   const pendingTodos = todos.filter((todo) => !todo.completed);
   const completedTodos = todos.filter((todo) => todo.completed);

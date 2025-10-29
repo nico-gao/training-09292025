@@ -49,7 +49,7 @@
  * E
  *
  * props drilling
- * passing props from parent component to deeply nested child components, the middle components don' tnecessarily need the data
+ * passing props from parent component to deeply nested child components, the middle components don't necessarily need the data
  *
  *
  *
@@ -60,4 +60,13 @@
  * DOM interactions (accessing DOM element, add/remove event listeners)
  * Locastorage
  * timeout/interval
+ */
+
+/**
+ * context
+ * why: avoid props drilling, centralize state maangement logic
+ * easier to maintain, easier to debug
+ *
+ * when not to use it
+ * frequent update
  */

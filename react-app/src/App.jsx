@@ -7,6 +7,7 @@ import Input from "./components/Input";
 import TodoApp from "./components/Todolist/TodoApp";
 import TodoCount from "./components/Todolist/TodoCount";
 import Timer from "./components/Timer";
+import { TodoContext } from "./context/TodoContext";
 
 const mockTodoData = [
   {
@@ -36,7 +37,7 @@ const people = [
 export default function App() {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState(mockTodoData);
-  const [toggleTimer, setToggleTimer] = useState(true);
+  const [toggleTimer, setToggleTimer] = useState(false);
 
   // const listItems = people.map((person) => <li>{person}</li>);
 
@@ -46,25 +47,25 @@ export default function App() {
 
   // no dependency array
   // run the setup function during mounting/updating
-  useEffect(() => {
-    console.log("use effect with no [] in App");
+  // useEffect(() => {
+  //   console.log("use effect with no [] in App");
 
-    return () => {
-      console.log("clean up in App");
-    };
-  });
+  //   return () => {
+  //     console.log("clean up in App");
+  //   };
+  // });
 
   // empty dependency array
   // run the setup function during mounting
-  useEffect(() => {
-    console.log("use effect with [] in App");
-  }, []);
+  // useEffect(() => {
+  //   console.log("use effect with [] in App");
+  // }, []);
 
   // non-empty dependency array
   // run the setup function during mounting/updating, but during updating, it listens to changes to the variables in dep array
-  useEffect(() => {
-    console.log("use effect with [todos] in App");
-  }, [todos]);
+  // useEffect(() => {
+  //   console.log("use effect with [todos] in App");
+  // }, [todos]);
 
   /**
    * mounting -> 1st setup function call
@@ -79,6 +80,7 @@ export default function App() {
       {toggleTimer && <Timer />}
       <button onClick={() => setToggleTimer(!toggleTimer)}>Toggle Timer</button>
       <TodoCount todos={todos} />
+
       <TodoApp todos={todos} setTodos={setTodos} />
       {/* <Input /> */}
       <Counter counter={count} setCounter={setCount} />

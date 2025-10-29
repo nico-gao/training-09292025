@@ -1,13 +1,16 @@
-export default function TodoList({
-  todos,
-  editId,
-  editInput,
-  setEditInput,
-  handleCancelEditTodo,
-  handleDeleteTodo,
-  handleEditTodo,
-  handleSaveTodo,
-}) {
+import { useContext } from "react";
+import { TodoContext } from "../../context/TodoContext";
+
+export default function TodoList({ todos }) {
+  const {
+    handleCancelEditTodo,
+    handleDeleteTodo,
+    handleEditTodo,
+    handleSaveTodo,
+    editId,
+    editInput,
+    setEditInput,
+  } = useContext(TodoContext);
   return (
     <ul>
       {todos.map((todo) => (

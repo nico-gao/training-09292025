@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef, useMemo } from "react";
 import TodoList from "./Todolist";
 import TodoForm from "./TodoForm";
 import { TodoContext } from "../../context/TodoContext";
@@ -10,8 +10,19 @@ export default function TodoApp() {
     console.log("use effect in TodoApp");
   });
 
-  const pendingTodos = todos.filter((todo) => !todo.completed);
+  const pendingTodos = useMemo(
+    () => todos.filter((todo) => !todo.completed),
+    [todos]
+  );
   const completedTodos = todos.filter((todo) => todo.completed);
+  const pendingTodosRef = useRef(pendingTodos);
+
+  useEffect(() => {
+    console.log(
+      "pendingtodo reference",
+      pendingTodos === pendingTodosRef.current
+    );
+  });
 
   return (
     <div>

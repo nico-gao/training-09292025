@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { TodoContext } from "../../context/TodoContext";
 
 export default function TodoList({ todos }) {
@@ -11,6 +11,15 @@ export default function TodoList({ todos }) {
     editInput,
     setEditInput,
   } = useContext(TodoContext);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (editId !== null) {
+      console.log(inputRef);
+      inputRef.current?.focus();
+    }
+  }, [editId]);
+
   return (
     <ul>
       {todos.map((todo) => (
@@ -21,6 +30,7 @@ export default function TodoList({ todos }) {
                 type="text"
                 value={editInput}
                 onChange={(e) => setEditInput(e.target.value)}
+                ref={inputRef}
               />
               <button onClick={handleSaveTodo}>Save</button>
               <button onClick={handleCancelEditTodo}>Cancel</button>
@@ -28,7 +38,13 @@ export default function TodoList({ todos }) {
           ) : (
             <>
               {todo.title}
-              <button onClick={() => handleEditTodo(todo.id)}>Edit</button>
+              <button
+                onClick={() => {
+                  handleEditTodo(todo.id);
+                }}
+              >
+                Edit
+              </button>
               <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
             </>
           )}

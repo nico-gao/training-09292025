@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef, useCallback } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -8,6 +8,7 @@ import TodoApp from "./components/Todolist/TodoApp";
 import TodoCount from "./components/Todolist/TodoCount";
 import Timer from "./components/Timer";
 import { TodoContext } from "./context/TodoContext";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 const mockTodoData = [
   {
@@ -37,7 +38,8 @@ const people = [
 export default function App() {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState(mockTodoData);
-  const [toggleTimer, setToggleTimer] = useState(false);
+
+  const [toggleTimer, setToggleTimer] = useLocalStorage("toggleTimer", false);
 
   // const listItems = people.map((person) => <li>{person}</li>);
 
@@ -74,11 +76,24 @@ export default function App() {
    * unmounting -> cleanup (for the 3rd render)
    */
 
+  const handleToggleOnclick = useCallback(
+    () => setToggleTimer((prev) => !prev),
+    []
+  );
+  const callbackRef = useRef(handleToggleOnclick);
+
+  useEffect(() => {
+    console.log(
+      "callback reference",
+      callbackRef.current === handleToggleOnclick
+    );
+  });
+
   return (
     // jsx -> js, babel (complier)
     <>
       {toggleTimer && <Timer />}
-      <button onClick={() => setToggleTimer(!toggleTimer)}>Toggle Timer</button>
+      <button onClick={handleToggleOnclick}>Toggle Timer</button>
       <TodoCount todos={todos} />
 
       <TodoApp todos={todos} setTodos={setTodos} />

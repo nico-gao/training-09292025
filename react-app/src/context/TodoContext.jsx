@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const TodoContext = createContext();
 
@@ -21,7 +22,7 @@ const mockTodoData = [
 ];
 
 export default function TodoProvider({ children }) {
-  const [todos, setTodos] = useState(mockTodoData);
+  const [todos, setTodos] = useLocalStorage("todos", mockTodoData);
   const [editId, setEditId] = useState(null);
   const [editInput, setEditInput] = useState("");
 

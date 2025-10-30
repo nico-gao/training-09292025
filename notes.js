@@ -70,3 +70,22 @@
  * when not to use it
  * frequent update
  */
+
+/**
+ *
+ * useRef
+ *
+ * useMemo, caching a calculated value
+ * useCallback, caching a function
+ *
+ * custom hook
+ * a functional component
+ * naming convention (useXXXX)
+ * reusable
+ * return data/function, instead of JSX
+ *
+ * useFetch
+ * UI library -> theming, useTheme
+ * web socket -> useWebSocket
+ * authentication -> useAuth
+ */

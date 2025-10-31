@@ -1,3 +1,79 @@
+/**
+ * what/why/how
+ *
+ * jsx
+ * syntax sugar of React.createElement -> React element
+ *
+ * render
+ * component -> jsx -> virtual DOM -> reconciliation (diffing) -> update real DOM
+ *
+ * reconciliation - find what has changed
+ *
+ * jsx -> react element (not a DOM element), describes what we want react to render
+ *
+ * react node - react element, array, string, number, (null, undefined, false)
+ *
+ * react component - functional component (16.8), class component
+ * reusable, building block of react application
+ *
+ * props and state changes can trigger component update
+ * props          vs         state
+ * external                  interanl
+ * read only                 setState
+ *
+ * react advantages
+ * ecosystem, component based (reusability, mraintainability, testing)
+ * csr, ssr
+ * typescript
+ * react devtool
+ *
+ * react limitations
+ * just library -> flexibility
+ * csr
+ * ssr -> nextjs
+ *
+ * pure component
+ * same props/state -> same jsx
+ *
+ * react hooks
+ * functional programming
+ * reusable, readability
+ *
+ * mounted
+ * component lifecycle
+ * component inserted into the real DOM
+ * mounting stage
+ *
+ * useState
+ * manage a local variable in the component between renders
+ * initial, return [state, setState]
+ *
+ * synthetic event
+ * react wrapper around the native events
+ * cross browser compatibility
+ * react does event delegation by default
+ *
+ * reducer
+ * reducer(pure function), useReducer (hook)
+ *
+ * validation on props
+ * PorpTypes -  validate the props passed to the component
+ * TypeScript
+ *
+ * controlled
+ * managed by react state
+ * easily do update, validation, reset
+ *
+ * uncontrolled
+ * managed by DOM
+ * keep it simple
+ *
+ * props drilling
+ * when passing data from parent to deeply nested child
+ * how to avoid: context
+ *
+ */
+
 // img src
 // App -> Profile -> Avatar
 // unidirection data flow, parent -> child
@@ -33,12 +109,6 @@
  */
 
 /**
- * props and state changes can trigger component update
- * props          vs         state
- * external                  interanl
- * read only                 setState
- *
- *
  *
  * state lifting
  * to share state between components, we want to lift the state to their common parent component

@@ -10,6 +10,12 @@ import Timer from "./components/Timer";
 import { TodoContext } from "./context/TodoContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
+export const a = 1;
+export const foo = () => {
+  console.log("foo function");
+  return "output from foo function";
+};
+
 const mockTodoData = [
   {
     id: 1,
@@ -95,12 +101,10 @@ export default function App() {
       {toggleTimer && <Timer />}
       <button onClick={handleToggleOnclick}>Toggle Timer</button>
       <TodoCount todos={todos} />
-
       <TodoApp todos={todos} setTodos={setTodos} />
       {/* <Input /> */}
       <Counter counter={count} setCounter={setCount} />
       {/* <Counter /> */}
-
       {/* <ul>
         {listItems}
         {people.map((person) => (
@@ -118,6 +122,8 @@ export default function App() {
     </>
   );
 }
+
+console.log(<App />);
 
 // props change -> re-render
 function Profile({ name, id, children }) {
@@ -137,9 +143,3 @@ function Profile({ name, id, children }) {
     </>
   );
 }
-
-export const a = 1;
-export const foo = () => {
-  console.log("foo function");
-  return "output from foo function";
-};

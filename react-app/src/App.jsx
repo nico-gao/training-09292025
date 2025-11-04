@@ -9,6 +9,7 @@ import TodoCount from "./components/Todolist/TodoCount";
 import Timer from "./components/Timer";
 import { TodoContext } from "./context/TodoContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import ClassDemo from "./components/ClassComponents/ClassDemo";
 
 export const a = 1;
 export const foo = () => {
@@ -45,7 +46,7 @@ export default function App() {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState(mockTodoData);
 
-  const [toggleTimer, setToggleTimer] = useLocalStorage("toggleTimer", false);
+  const [toggle, setToggle] = useLocalStorage("toggle", false);
 
   // const listItems = people.map((person) => <li>{person}</li>);
 
@@ -82,10 +83,7 @@ export default function App() {
    * unmounting -> cleanup (for the 3rd render)
    */
 
-  const handleToggleOnclick = useCallback(
-    () => setToggleTimer((prev) => !prev),
-    []
-  );
+  const handleToggleOnclick = useCallback(() => setToggle((prev) => !prev), []);
   const callbackRef = useRef(handleToggleOnclick);
 
   useEffect(() => {
@@ -98,12 +96,13 @@ export default function App() {
   return (
     // jsx -> js, babel (complier)
     <>
-      {toggleTimer && <Timer />}
-      <button onClick={handleToggleOnclick}>Toggle Timer</button>
-      <TodoCount todos={todos} />
-      <TodoApp todos={todos} setTodos={setTodos} />
+      {toggle && <ClassDemo name={"alice"} />}
+      {/* {toggleTimer && <Timer />} */}
+      <button onClick={handleToggleOnclick}>Toggle</button>
+      {/* <TodoCount todos={todos} /> */}
+      {/* <TodoApp todos={todos} setTodos={setTodos} /> */}
       {/* <Input /> */}
-      <Counter counter={count} setCounter={setCount} />
+      {/* <Counter counter={count} setCounter={setCount} /> */}
       {/* <Counter /> */}
       {/* <ul>
         {listItems}

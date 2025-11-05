@@ -33,17 +33,22 @@ class ClassDemo extends Component {
 
   render() {
     console.log("ClassDemo render");
+
     return (
       <div>
         <h1>This is a class component</h1>
         <p>Counter: {this.state.counter}</p>
         <button onClick={this.handleAdd}>Add 1</button>
+
+        <ChildComponent name={this.state.name} />
       </div>
     );
   }
 
   componentDidMount() {
     console.log("ClassDemo component did mount");
+    const btn = document.querySelector("#toggle-btn");
+    console.log(btn);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -64,6 +69,32 @@ class ClassDemo extends Component {
 }
 
 export default ClassDemo;
+
+class ChildComponent extends Component {
+  render() {
+    console.log("child class component render");
+    return <h2>Child Class Component</h2>;
+  }
+
+  componentDidMount() {
+    console.log("child class component did mount");
+  }
+
+  componentDidUpdate() {
+    console.log("child class component did update");
+  }
+
+  componentWillUnmount() {
+    console.log("child class component will unmount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.name === nextProps.name) {
+      return false;
+    }
+    return true;
+  }
+}
 
 // class Person {
 //   constructor(name) {

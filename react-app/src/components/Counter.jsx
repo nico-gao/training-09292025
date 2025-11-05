@@ -1,4 +1,4 @@
-import { useState, useReducer, useContext } from "react";
+import { useState, useReducer, useContext, memo } from "react";
 import { TodoContext } from "../context/TodoContext";
 
 // useReducer, reducer is a pure function
@@ -29,11 +29,13 @@ const counterReducer = (state, action) => {
   }
 };
 
-export default function Counter() {
+function Counter(props) {
   // const [counter, setCounter] = useState(0); // hook
-  const [counter, dispatch] = useReducer(counterReducer, 0);
+  // const [counter, dispatch] = useReducer(counterReducer, 0);
   const { editInput } = useContext(TodoContext);
-  console.log("editInput in counter", editInput);
+  // console.log("editInput in counter", editInput);
+
+  console.log("counter component render");
 
   const handleAddToCounter = () => {
     // setCounter(counter + 1);
@@ -41,17 +43,20 @@ export default function Counter() {
     // counter = counter + 1; // never do this
   };
 
-  console.log(counter);
+  // console.log(counter);
   return (
     <div>
-      <p>{counter}</p>
-      <button onClick={() => dispatch({ type: "ADD", payload: 1 })}>
+      <p>{props.counter}</p>
+      <button onClick={props.handleAddToCount}>Add 1</button>
+      {/* <button onClick={() => dispatch({ type: "ADD", payload: 1 })}>
         Add 1
-      </button>
-      <button onClick={() => dispatch({ type: "MINUS", payload: 1 })}>
+      </button> */}
+      {/* <button onClick={() => dispatch({ type: "MINUS", payload: 1 })}>
         Minus 1
       </button>
-      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button> */}
     </div>
   );
 }
+const MemoizedCounter = memo(Counter);
+export default MemoizedCounter;

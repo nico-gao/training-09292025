@@ -159,3 +159,29 @@
  * web socket -> useWebSocket
  * authentication -> useAuth
  */
+
+/**
+ * state management
+ *
+ * client state (local state)
+ * live in the browser
+ * Redux, Zustand, context API (dependency injection)
+ *
+ * server state
+ * come from outside of the react app
+ * React Query (TanStack Query), Redux with async thunk
+ *
+ * FLUX
+ * architecture, pattern
+ * action, dispatcher, store, view
+ *
+ * Redux
+ * redux-core, react-redux, redux toolkit
+ * 
+ * 
+reducer function (pure function)
+
+[state, dispatch] <- useRedcuer <- React
+dispatch <- useDispatch <- react-redux
+
+ */

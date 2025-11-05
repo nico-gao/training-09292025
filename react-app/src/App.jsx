@@ -10,6 +10,7 @@ import Timer from "./components/Timer";
 import { TodoContext } from "./context/TodoContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import ClassDemo from "./components/ClassComponents/ClassDemo";
+import CarApp from "./components/ClassComponents/CarApp";
 
 export const a = 1;
 export const foo = () => {
@@ -48,6 +49,10 @@ export default function App() {
 
   const [toggle, setToggle] = useLocalStorage("toggle", false);
 
+  const handleAddToCount = useCallback(() => {
+    setCount((prev) => prev + 1);
+  }, []);
+
   // const listItems = people.map((person) => <li>{person}</li>);
 
   // console.log("listItems", listItems);
@@ -66,9 +71,9 @@ export default function App() {
 
   // empty dependency array
   // run the setup function during mounting
-  // useEffect(() => {
-  //   console.log("use effect with [] in App");
-  // }, []);
+  useEffect(() => {
+    console.log("use effect with [] in App");
+  }, []);
 
   // non-empty dependency array
   // run the setup function during mounting/updating, but during updating, it listens to changes to the variables in dep array
@@ -96,13 +101,16 @@ export default function App() {
   return (
     // jsx -> js, babel (complier)
     <>
+      {/* <CarApp /> */}
       {toggle && <ClassDemo name={"alice"} />}
       {/* {toggleTimer && <Timer />} */}
-      <button onClick={handleToggleOnclick}>Toggle</button>
+      <button id="toggle-btn" onClick={handleToggleOnclick}>
+        Toggle
+      </button>
       {/* <TodoCount todos={todos} /> */}
       {/* <TodoApp todos={todos} setTodos={setTodos} /> */}
       {/* <Input /> */}
-      {/* <Counter counter={count} setCounter={setCount} /> */}
+      <Counter counter={count} handleAddToCount={handleAddToCount} />
       {/* <Counter /> */}
       {/* <ul>
         {listItems}

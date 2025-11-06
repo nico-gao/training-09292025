@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useMyDispatch } from "../hooks/useMyDispatch";
+import { useMySelector } from "../hooks/useMySelector";
+import withCounter from "../hoc/withCounter";
 
-function CarApp() {
-  const cars = useSelector((state) => state);
-  console.log("cars", cars);
+function CarApp({ counter, handleIncrement, handleDecrement }) {
   const dispatch = useDispatch();
-  console.log("dispatch", dispatch);
+  const cars = useSelector((state) => state);
+  console.log(counter, handleIncrement, handleDecrement);
 
   return (
     <>
@@ -31,4 +33,5 @@ function CarApp() {
   );
 }
 
-export default CarApp;
+const WrappedCarApp = withB(withA(withCounter(CarApp)));
+export default WrappedCarApp;

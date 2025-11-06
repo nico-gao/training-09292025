@@ -184,4 +184,25 @@ reducer function (pure function)
 [state, dispatch] <- useRedcuer <- React
 dispatch <- useDispatch <- react-redux
 
+ * hof - higher order function
+takes or returns a function
+array.forEach(()=>{})
+
+  currying
+  the tranformation of making a function to be called in sequence, instead of taking multiple arguments at once
+
+  foo(a,b,c);
+  foo(a)(b)(c) // calling a curried function
+
+  all curried functions are hof, but not all hof are curried
+
+
+  hoc - higher order component
+  a funciton that takes a component as argument and returns a new component
+  for reusing react logic
+
+  pros: reuse react logic, decoupling
+  cons: wrapper hell, props naming conflict, harder to debug
+
+  custom hook
  */

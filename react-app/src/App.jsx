@@ -11,6 +11,8 @@ import { TodoContext } from "./context/TodoContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import ClassDemo from "./components/ClassComponents/ClassDemo";
 import CarApp from "./components/ClassComponents/CarApp";
+import { Link, Route, Routes } from "react-router";
+import Layout from "./components/Layout";
 
 export const a = 1;
 export const foo = () => {
@@ -100,19 +102,24 @@ export default function App() {
 
   return (
     // jsx -> js, babel (complier)
-    <>
-      {/* <CarApp /> */}
-      {toggle && <ClassDemo name={"alice"} />}
-      {/* {toggleTimer && <Timer />} */}
-      <button id="toggle-btn" onClick={handleToggleOnclick}>
+    <div style={{ height: "200vh" }}>
+      <Layout>
+        <Routes>
+          <Route index element={<h1>Home Page</h1>} />
+          <Route path="class-demo" element={<ClassDemo name={"alice"} />} />
+          <Route path="car-app" element={<CarApp />} />
+          <Route path="timer" element={<Timer />} />
+        </Routes>
+
+        {/* <button id="toggle-btn" onClick={handleToggleOnclick}>
         Toggle
-      </button>
-      {/* <TodoCount todos={todos} /> */}
-      {/* <TodoApp todos={todos} setTodos={setTodos} /> */}
-      {/* <Input /> */}
-      <Counter counter={count} handleAddToCount={handleAddToCount} />
-      {/* <Counter /> */}
-      {/* <ul>
+      </button> */}
+        {/* <TodoCount todos={todos} /> */}
+        {/* <TodoApp todos={todos} setTodos={setTodos} /> */}
+        {/* <Input /> */}
+        {/* <Counter counter={count} handleAddToCount={handleAddToCount} /> */}
+        {/* <Counter /> */}
+        {/* <ul>
         {listItems}
         {people.map((person) => (
           <li>{person}</li>
@@ -126,7 +133,8 @@ export default function App() {
           <Profile name={person} id={index} key={index}></Profile>
         ))}
       </ul> */}
-    </>
+      </Layout>
+    </div>
   );
 }
 

@@ -5,14 +5,17 @@ import App from "./App.jsx";
 import { a, foo } from "./App";
 import TodoProvider from "./context/TodoContext.jsx";
 import { BrowserRouter } from "react-router";
+import MyBrowserRouter from "./MyRouter/MyBrowserRouter.jsx";
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
-  <BrowserRouter>
+  <MyBrowserRouter>
+    {/* <BrowserRouter> */}
     <TodoProvider>
       <App />
     </TodoProvider>
-  </BrowserRouter>
+    {/* </BrowserRouter> */}
+  </MyBrowserRouter>
 
   // </StrictMode>,
 );

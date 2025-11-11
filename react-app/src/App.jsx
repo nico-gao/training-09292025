@@ -13,6 +13,9 @@ import ClassDemo from "./components/ClassComponents/ClassDemo";
 import CarApp from "./components/ClassComponents/CarApp";
 import { Link, Route, Routes } from "react-router";
 import Layout from "./components/Layout";
+import MyRoutes from "./MyRouter/MyRoutes";
+import MyRoute from "./MyRouter/MyRoute";
+import InputDemo from "./components/InputDemo";
 
 export const a = 1;
 export const foo = () => {
@@ -104,12 +107,20 @@ export default function App() {
     // jsx -> js, babel (complier)
     <div style={{ height: "200vh" }}>
       <Layout>
-        <Routes>
+        <MyRoutes>
+          <MyRoute path="/" element={<h1>Home Page</h1>} />
+          <MyRoute path="/class-demo" element={<ClassDemo name={"alice"} />} />
+          <MyRoute path="/timer" element={<Timer />} />
+          <MyRoute path="/car-app" element={<CarApp />} />
+          <MyRoute path="/input-demo" element={<InputDemo />} />
+        </MyRoutes>
+        {/* <Routes>
           <Route index element={<h1>Home Page</h1>} />
           <Route path="class-demo" element={<ClassDemo name={"alice"} />} />
-          <Route path="car-app" element={<CarApp />} />
           <Route path="timer" element={<Timer />} />
-        </Routes>
+          <Route path="car-app" element={<p>car app</p>} />
+          <Route path="car-app" element={<CarApp />} />
+        </Routes> */}
 
         {/* <button id="toggle-btn" onClick={handleToggleOnclick}>
         Toggle

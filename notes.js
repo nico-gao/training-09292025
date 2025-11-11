@@ -205,4 +205,11 @@ array.forEach(()=>{})
   cons: wrapper hell, props naming conflict, harder to debug
 
   custom hook
+
+
+  debounce
+  delaying the function call until user stops the action after certain amount of time
+
+  throttle
+  trigger function call only once within certain time interval
  */

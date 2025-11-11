@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import MyLink from "../MyRouter/MyLink";
 
 function Layout({ children }) {
   return (
@@ -14,12 +15,17 @@ function Layout({ children }) {
           right: "0",
         }}
       >
-        <Link to="/">Home</Link>
+        {/* <Link to="/">Home</Link>
         <Link to="/class-demo">Class Demo</Link>
         <Link to="/car-app">Car App</Link>
-        <Link to="/timer">Timer</Link>
+        <Link to="/timer">Timer</Link> */}
+        <MyLink to="/">Home</MyLink>
+        <MyLink to="/class-demo">Class Demo</MyLink>
+        <MyLink to="/car-app">Car App</MyLink>
+        <MyLink to="/timer">Timer</MyLink>
+        <MyLink to="/input-demo">Input Demo</MyLink>
       </nav>
-      {children}
+      <div style={{ marginTop: "50px" }}>{children}</div>
     </>
   );
 }
